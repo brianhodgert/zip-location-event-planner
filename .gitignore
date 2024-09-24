@@ -1,0 +1,7 @@
+node_modules
+.DS_store
+.serverless
+.vscode
+oasis-all-tracker.json
+config.yml
+.env

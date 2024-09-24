@@ -1,0 +1,30 @@
+{
+    "headers": {
+        "Authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzEwNzQ2NSwiZXhwIjoxNzI3MjgwMjY1fQ.tCXeifr92tSE_zhSahOpEWtUTs70zS9BYbxJnJq9Q9s"
+    },
+    "httpMethod": "POST",
+    "body": {
+        "location": 80304,
+        "activities": [
+            {
+                "activity": "basketball",
+                "skill": 3
+            },
+            {
+                "activity": "volleyball",
+                "skill": 4
+            }
+        ],
+        "availabilities": [
+            {
+                "timeOfDay": "morning",
+                "dayOfWeek": 2
+            },
+            {
+                "timeOfDay": "morning",
+                "dayOfWeek": 2
+            }
+        ],
+        "playerID": "player1"
+    }
+}

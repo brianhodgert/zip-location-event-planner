@@ -1,0 +1,8 @@
+{
+  "Template": {
+    "TemplateName": "atl-player-otp-template",
+    "SubjectPart": "Login Verification",
+    "HtmlPart": "<div style=\"font-family: Helvetica,Arial,sans-serif;min-width:1000px;overflow:auto;line-height:2\"><div style=\"margin:50px auto;width:70%;padding:20px 0\"><div style=\"border-bottom:1px solid #eee\"><a href=\"\" style=\"font-size:1.4em;color: #00466a;text-decoration:none;font-weight:600\">Pickup Play</a></div><p style=\"font-size:1.1em\">Hi,</p><p>Thank you for choosing Pickup Play. Use the following code to complete your sign-in procedures. Code is valid for 5 minutes</p><h2 style=\"background: #00466a;margin: 0 auto;width: max-content;padding: 0 10px;color: #fff;border-radius: 4px;\">{{otp}}</h2><p style=\"font-size:0.9em;\">Regards,<br />Pickup Play</p><hr style=\"border:none;border-top:1px solid #eee\" /><div style=\"float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300\"><p>Pickup Play</p><p>123 Happy Place Road</p><p>Planet, Earth</p></div></div></div>",
+    "TextPart": "\n\nHi,\nThank you for choosing our service. Use the following code to reset your password. Code is valid for 5 minutes\n{{otp}}\n\nKind regards.\n\n"
+  }
+}

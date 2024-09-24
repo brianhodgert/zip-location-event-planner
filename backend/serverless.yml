@@ -1,0 +1,542 @@
+service: atl-player
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+  environment: 
+    ATL_PLAYER_TABLE_NAME: ${opt:stage, 'dev'}-atl-player-table
+    ACCESS_TOKEN_SECRET: ${file(./config.yml):ACCESS_TOKEN_SECRET}
+    SEND_OTP_URL: !Ref sendOTPEmailQueue
+    OTP_TEMPLATE_NAME: atl-player-otp-template
+    TEMP_PASSWAORD_TEMPLATE_NAME: atl-player-tempPassword-template
+    CONFIGURATION_SET_NAME: atl-player-configurationSet
+
+
+############## F U N C T I O N S ##############
+functions:
+
+##### A U T H E N T I C A T I O N  #####
+  loginOTP:
+    handler: authentication/loginOTP/index.handler
+    role:
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/loginOTP
+          method: post
+          cors: true
+  verifyTempPassword:
+    handler: authentication/verifyTempPassword/index.handler
+    role:
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/verifyTempPassword
+          method: post
+          cors: true
+  createNewPassword:
+    handler: authentication/createNewPassword/index.handler
+    role:
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/createNewPassword
+          method: post
+          cors: true
+  requestOTP:
+    handler: authentication/requestOTP/index.handler
+    role: 
+      Fn::GetAtt:
+        - requestOTPRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/requestOTP
+          method: post
+          cors: true
+  requestNewPassword:
+    handler: authentication/requestNewPassword/index.handler
+    role: 
+      Fn::GetAtt:
+        - requestOTPRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/requestNewPassword
+          method: post
+          cors: true
+  userExists:
+    handler: authentication/userExists/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/userExists
+          method: post
+          cors: true
+  refreshToken:
+    handler: authentication/refreshToken/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/authentication/refreshToken
+          method: post
+          cors: true
+  sendOTPEmail:
+    handler: authentication/sendOTPEmail/index.handler
+    role: 
+      Fn::GetAtt:
+        - sendOTPEmailRole
+        - Arn
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - sendOTPEmailQueue
+              - Arn
+
+  processFailedOTPEmail:
+    handler: authentication/processFailedEmail/index.handler
+    role: 
+      Fn::GetAtt:
+        - processFailedOTPEmailRole
+        - Arn
+    events:
+      - sqs:
+          arn:
+            Fn::GetAtt:
+              - failedOtpQueue
+              - Arn
+
+##### U S E R  -  I N F O #####
+##Profile##
+  profile:
+    handler: profile/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/profile
+          method: get
+          cors: true
+      - http:
+          path: v1/profile
+          method: put
+          cors: true
+      - http:
+          path: v1/profile
+          method: post
+          cors: true
+
+##Invites##
+  invites:
+    handler: invites/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/invites
+          method: get
+          cors: true
+      - http:
+          path: v1/invites/{inviteID}
+          method: put
+          cors: true
+      - http:
+          path: v1/invites
+          method: post
+          cors: true
+
+##Registered games##
+  registeredGames:
+    handler: registeredGames/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/registeredGames
+          method: get
+          cors: true
+
+##Player availabilities##
+  playerAvailabilities:
+    handler: playerAvailabilities/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/playerAvailabilities
+          method: get
+          cors: true
+      - http:
+          path: v1/playerAvailabilities
+          method: post
+          cors: true
+      - http:
+          path: v1/playerAvailabilities
+          method: delete
+          cors: true
+      
+
+##### L O C A T I O N  -  B A S E D #####
+##Games##
+  games:
+    handler: games/index.handler
+    timeout: 30
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/games
+          method: get
+          cors: true
+      - http:
+          path: v1/games/{gameID}
+          method: get
+          cors: true
+      - http:
+          path: v1/games
+          method: post
+          cors: true
+      - http:
+          path: v1/games/{gameID}
+          method: put
+          cors: true
+
+##Game status##
+  gameStatus:
+    handler: gameStatus/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/gameStatus
+          method: put
+          cors: true
+
+##Available players##
+  availablePlayers:
+    handler: availablePlayers/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/availablePlayers
+          method: get
+          cors: true
+
+##Available games##
+  availableGames:
+    handler: availableGames/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/availableGames
+          method: get
+          cors: true
+
+##Suggested games##
+  suggestedGames:
+    handler: suggestedGames/index.handler
+    timeout: 30
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/suggestedGames
+          method: get
+          cors: true
+
+
+############## R E S O U R C E S ##############
+resources:
+  Resources:
+    
+    playerTable:
+      Type: "AWS::DynamoDB::Table"
+      Properties:
+        TableName: ${self:provider.environment.ATL_PLAYER_TABLE_NAME}
+        AttributeDefinitions:
+        - AttributeName: "PK"
+          AttributeType: "S"
+        - AttributeName: "SK"
+          AttributeType: "S"
+        KeySchema:
+        - AttributeName: "PK"
+          KeyType: "HASH"
+        - AttributeName: "SK"
+          KeyType: "RANGE"
+        ProvisionedThroughput:
+          ReadCapacityUnits: 20
+          WriteCapacityUnits: 20
+  
+    LambdaExecutionRole:
+      Type: 'AWS::IAM::Role'
+      Properties:
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: 'Allow'
+              Principal:
+                Service:
+                  - 'lambda.amazonaws.com'
+              Action:
+                - 'sts:AssumeRole'
+        Policies:
+          - PolicyName: 'DynamoDBAccess'
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: 'Allow'
+                  Action:
+                    - 'dynamodb:*'
+                  Resource:
+                    Fn::GetAtt:
+                      - playerTable
+                      - Arn
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                        - ':'
+                        - - 'arn:aws:logs'
+                          - Ref: 'AWS::Region'
+                          - Ref: 'AWS::AccountId'
+                          - 'log-group:/aws/lambda/*:*:*'
+
+    sendOTPEmailQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-sendOTPEmailQueue-${opt:stage, 'dev'}
+        RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - 'OTPEmailDLQ'
+              - 'Arn'
+          maxReceiveCount: 5
+    OTPEmailDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-OTPEmailDLQ-${opt:stage, 'dev'}
+    
+    failedOtpQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-failedOtpQueue-${opt:stage, 'dev'}
+        RedrivePolicy:
+          deadLetterTargetArn:
+            Fn::GetAtt:
+              - 'failedOtpDLQ'
+              - 'Arn'
+          maxReceiveCount: 5
+    failedOtpDLQ:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: ${self:service}-failedOtpDLQ-${opt:stage, 'dev'}
+
+    bouncesAndComplaintsTopicOTP:
+      Type: AWS::SNS::Topic
+      Properties:
+        TopicName: ${self:service}-bouncesAndComplaintsTopicOTP-${opt:stage, 'dev'}
+        Subscription:
+          - Protocol: sqs
+            Endpoint: !GetAtt failedOtpQueue.Arn                         
+
+
+
+##IAM ROLES AND POLICIES
+############################################
+    sendOTPEmailRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:service}-sendOTPEmailRole-${opt:stage, 'dev'}
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: Policy-sendOTPEmailRole-${opt:stage, 'dev'}
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - sqs:*
+                  Resource: 
+                    Fn::GetAtt:
+                      - sendOTPEmailQueue
+                      - Arn
+                - Effect: 'Allow'
+                  Action:
+                    - ses:SendTemplatedEmail
+                  Resource: arn:aws:ses:us-east-1:815127904764:*
+                - Effect: 'Allow'
+                  Action:
+                    - dynamodb:Query
+                  Resource:
+                    Fn::GetAtt:
+                      - playerTable
+                      - Arn
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                        - ':'
+                        - - 'arn:aws:logs'
+                          - Ref: 'AWS::Region'
+                          - Ref: 'AWS::AccountId'
+                          - 'log-group:/aws/lambda/*:*:*'
+
+    processFailedOTPEmailRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:service}-processFailedOTPEmailRole-${opt:stage, 'dev'}
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: Policy-processFailedOTPEmailRole-${opt:stage, 'dev'}
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - sqs:*
+                  Resource: 
+                    Fn::GetAtt:
+                      - failedOtpQueue
+                      - Arn
+                - Effect: 'Allow'
+                  Action:
+                    - dynamodb:PutItem
+                  Resource:
+                    Fn::GetAtt:
+                      - playerTable
+                      - Arn
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                        - ':'
+                        - - 'arn:aws:logs'
+                          - Ref: 'AWS::Region'
+                          - Ref: 'AWS::AccountId'
+                          - 'log-group:/aws/lambda/*:*:*'
+
+    requestOTPRole:
+      Type: AWS::IAM::Role
+      Properties:
+        RoleName: ${self:service}-requestOTPRole-${opt:stage, 'dev'}
+        AssumeRolePolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Effect: Allow
+              Principal:
+                Service:
+                  - lambda.amazonaws.com
+              Action:
+                - sts:AssumeRole
+        Policies:
+          - PolicyName: Policy-requestOTPRole-${opt:stage, 'dev'}
+            PolicyDocument:
+              Version: '2012-10-17'
+              Statement:
+                - Effect: Allow
+                  Action:
+                    - sqs:SendMessage
+                  Resource: 
+                    Fn::GetAtt:
+                      - sendOTPEmailQueue
+                      - Arn
+                - Effect: 'Allow'
+                  Action:
+                    - dynamodb:UpdateItem
+                    - dynamodb:PutItem
+                    - dynamodb:Query
+                    - dynamodb:GetItem
+                  Resource:
+                    Fn::GetAtt:
+                      - playerTable
+                      - Arn
+                - Effect: Allow
+                  Action:
+                    - logs:CreateLogGroup
+                    - logs:CreateLogStream
+                    - logs:PutLogEvents
+                  Resource:
+                    - 'Fn::Join':
+                        - ':'
+                        - - 'arn:aws:logs'
+                          - Ref: 'AWS::Region'
+                          - Ref: 'AWS::AccountId'
+                          - 'log-group:/aws/lambda/*:*:*'
+
+    sqsFailedOTPEmailPolicyAtlPlayer:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        Queues:
+          - !Ref failedOtpQueue
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+            - Action: 'sqs:SendMessage'
+              Resource: !GetAtt failedOtpQueue.Arn
+              Effect: 'Allow'
+              Condition:
+                ArnEquals:
+                  aws:SourceArn: !Ref bouncesAndComplaintsTopicOTP
+              Principal:
+                Service: 'sns.amazonaws.com'
+plugins:
+  - serverless-prune-plugin

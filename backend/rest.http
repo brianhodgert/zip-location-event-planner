@@ -1,0 +1,282 @@
+
+//-------------------------------------------
+//----------USER ACCOUNT MANAGEMENT----------
+//-------------------------------------------
+//Check if user exists.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/userExists
+
+{
+   "email": "hodgerta@gmail.com"
+}
+###
+
+//Refresh token.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/refreshToken
+Authorization: Bearer token
+
+###
+
+//Request OTP.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestOTP
+
+{
+   "email": "hodgerta@gmail.com",
+   "password": "1234"
+}
+###
+
+//Login with OTP.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/loginOTP
+
+{
+   "email": "hodgerta@gmail.com",
+   "otp": "9879"
+}
+###
+
+//Request new password.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestNewPassword
+
+{
+   "email": "hodgerta@gmail.com"
+}
+###
+
+// Verify temp password
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/verifyTempPassword
+
+{
+   "email": "hodgerta@gmail.com",
+   "tempPassword": "GNErTpqsQG"
+}
+###
+
+//Create new password.
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/createNewPassword
+
+{
+   "email": "hodgerta@gmail.com",
+   "tempPassword": "xHbNjOIwGL",
+   "password": "1234"
+}
+###
+
+
+
+
+
+//---------------------------------------------------------------------------------------------------------------
+//----------   -------         ----      APP      ------    ----------   --------------  ----------     ---------
+//---------------------------------------------------------------------------------------------------------------
+
+
+//-------------------------------------------
+//--------------- p r o f i l e -------------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzE0OTI1MywiZXhwIjoxNzI3MzIyMDUzfQ.MNqcNeZCLSeODLoxn3Xz-IswF1XIcl6DdNmZMFV-tLU
+###
+PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+
+{
+    "location": 80304,
+    "activities": [
+        {
+            "activity": "basketball",
+            "skill": 3
+        },
+        {
+            "activity": "volleyball",
+            "skill": 4
+        }
+    ],
+    "availabilities": [
+        {
+            "timeOfDay": "afternoon",
+            "dayOfWeek": 2
+        },
+        {
+            "timeOfDay": "afternoon",
+            "dayOfWeek": 3
+        },
+        {
+            "timeOfDay": "afternoon",
+            "dayOfWeek": 0
+        }
+
+    ],
+    "friends": ["player2, player4"]
+}
+###
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzExNDcwOCwiZXhwIjoxNzI3Mjg3NTA4fQ.Ggcx5Yf7UUlGp07UZ-mtfUcE7FrePvhUabj5HIZC5iQ
+
+{
+    "location": 80304,
+    "activities": [
+        {
+            "activity": "basketball",
+            "skill": 3
+        },
+        {
+            "activity": "volleyball",
+            "skill": 4
+        }
+    ],
+    "availabilities": [
+        {
+            "timeOfDay": "morning",
+            "dayOfWeek": 2
+        },
+                {
+            "timeOfDay": "afternoon",
+            "dayOfWeek": 2
+        }
+    ],
+    "playerID": "player1"
+
+}
+###
+
+
+//-------------------------------------------
+//--------------- i n v i t e s -------------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites
+Authorization: Bearer token
+###
+PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites/{inviteID}
+Authorization: Bearer token
+{
+    "didAccept": true,
+    "inviteType": "player"
+}
+###
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites
+Authorization: Bearer token
+{
+    "inviteType": "game",
+    "playerID": "player1",
+    "gameInfo": {
+        "gamePK": "basketball-80304",
+        "gameSK": "20241122-x4dssadsdf"
+    }
+}
+###
+
+
+//-------------------------------------------
+//----------------- g a m e s ---------------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games/f47391d0-79de-11ef-a422-2b5f7ec9aadf?gamePK=80304-game&gameSK=20241103-f47391d0-79de-11ef-a422-2b5f7ec9aadf
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+###
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+
+{
+    "activity": "basketball",
+    "startTime": "5:00",
+    "endTime": "17:00",
+    "coordinates": "123,12314",
+    "isOpen": true,
+    "name": "NBRC pickup",
+    "playerCount": 0,
+    "description": "Fun pickup",
+    "minPlayers": 4,
+    "maxPlayers": 20,
+    "level": 3,
+    "dateStamp": "20240923",
+    "location": 80304
+}
+###
+PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games/gameID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+
+{
+    "activity": "basketball",
+    "startTime": "6:00",
+    "endTime": "17:00",
+    "coordinates": "123,12314",
+    "isOpen": true,
+    "name": "NBRC pickup",
+    "playerCount": 0,
+    "description": "Fun pickup",
+    "minPlayers": 4,
+    "maxPlayers": 22,
+    "level": 3,
+    "dateStamp": "20240923",
+    "location": 80304,
+    "gameCreator": "player1",
+    "PK": "80304-game",
+    "SK": "20241103-f47391d0-79de-11ef-a422-2b5f7ec9aadf"
+}
+###
+
+//-------------------------------------------
+//---------- g a m e S t a t u s ------------
+//-------------------------------------------
+PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/gameStatus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+
+{
+    "playerID": "player2",
+    "status": "leave",
+    "startTime": "8:00",
+    "endTime": "11:30",
+    "coordinates": "123,12314",
+    "gamePK": "80304-game",
+    "gameSK": "20241103-f47391d0-79de-11ef-a422-2b5f7ec9aadf"
+}
+###
+
+//-------------------------------------------
+//----- r e g i s t e r e d G a m e s -------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/registeredGames
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+###
+
+//-------------------------------------------
+//------ s u g g e s t e d G a m e s --------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/suggestedGames?dateStamp=20240923
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+###
+
+//-------------------------------------------
+//- p l a y e r A v a i l a b i l i t i e s -
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+###
+POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+
+{
+    "startTime": "12:00",
+    "endTime": "16:00",
+    "dateStamp": "20241124",
+    "activity": "basketball",
+    "location": 80304,
+    "skill": 3
+}
+###
+DELETE https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+###
+
+//-------------------------------------------
+//----- a v a i l a b l e P l a y e r s -----
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/availablePlayers?activity=basketball&location=80304&proximity=10&dateStamp=20241124&time=1700
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+###
+
+//-------------------------------------------
+//------- a v a i l a b l e G a m e s -------
+//-------------------------------------------
+GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/availableGames?activity=basketball&location=80304&proximity=10&dateStamp=20241103&time=1700
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+###
