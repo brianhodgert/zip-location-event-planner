@@ -3,21 +3,21 @@
 //----------USER ACCOUNT MANAGEMENT----------
 //-------------------------------------------
 //Check if user exists.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/userExists
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/userExists
 
 {
-   "email": "hodgerta@gmail.com"
+   "email": "oasis@oasis-alltracker.com"
 }
 ###
 
 //Refresh token.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/refreshToken
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/refreshToken
 Authorization: Bearer token
 
 ###
 
 //Request OTP.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestOTP
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestOTP
 
 {
    "email": "hodgerta@gmail.com",
@@ -26,16 +26,16 @@ POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authenticatio
 ###
 
 //Login with OTP.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/loginOTP
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/loginOTP
 
 {
    "email": "hodgerta@gmail.com",
-   "otp": "9879"
+   "otp": "7549"
 }
 ###
 
 //Request new password.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestNewPassword
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/requestNewPassword
 
 {
    "email": "hodgerta@gmail.com"
@@ -43,7 +43,7 @@ POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authenticatio
 ###
 
 // Verify temp password
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/verifyTempPassword
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/verifyTempPassword
 
 {
    "email": "hodgerta@gmail.com",
@@ -52,7 +52,7 @@ POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authenticatio
 ###
 
 //Create new password.
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/createNewPassword
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/authentication/createNewPassword
 
 {
    "email": "hodgerta@gmail.com",
@@ -73,11 +73,11 @@ POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/authenticatio
 //-------------------------------------------
 //--------------- p r o f i l e -------------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzE0OTI1MywiZXhwIjoxNzI3MzIyMDUzfQ.MNqcNeZCLSeODLoxn3Xz-IswF1XIcl6DdNmZMFV-tLU
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 ###
-PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+PUT https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 
 {
     "location": 80304,
@@ -106,11 +106,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlc
         }
 
     ],
-    "friends": ["player2, player4"]
+    "friends": ["player2", "player4"]
 }
 ###
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzExNDcwOCwiZXhwIjoxNzI3Mjg3NTA4fQ.Ggcx5Yf7UUlGp07UZ-mtfUcE7FrePvhUabj5HIZC5iQ
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/profile
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsImlhdCI6MTcyNzQwNDE0NSwiZXhwIjoxNzI3NTc2OTQ1fQ.ioO3McO9buL2jEd5DhvBC4wEpYoJl09fbnJRP9DYVYA
 
 {
     "location": 80304,
@@ -135,33 +135,73 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlc
         }
     ],
     "playerID": "player1"
-
 }
+###
+
+//-------------------------------------------
+//--------------- f r i e n d s -------------
+//-------------------------------------------
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/friends
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+###
+
+DELETE https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/friends/player4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+###
+
+
+//-------------------------------------------
+//---------------- s q u a d s --------------
+//-------------------------------------------
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/squads
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+###
+
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/squads/watt
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+###
+
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/squads
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+
+{
+    "squadID": "wattt"
+}
+###
+
+DELETE https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/squads/wattt
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 ###
 
 
 //-------------------------------------------
 //--------------- i n v i t e s -------------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites
-Authorization: Bearer token
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/invites
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 ###
-PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites/{inviteID}
-Authorization: Bearer token
+PUT https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/invites/{inviteID}
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+
 {
-    "didAccept": true,
-    "inviteType": "player"
-}
-###
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/invites
-Authorization: Bearer token
-{
+    "didAccept": false,
     "inviteType": "game",
-    "playerID": "player1",
-    "gameInfo": {
+    "inviteID": {
         "gamePK": "basketball-80304",
         "gameSK": "20241122-x4dssadsdf"
     }
+}
+###
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/invites
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
+
+{
+    "inviteType": "game",
+    "inviteID": {
+        "gamePK": "80304-game",
+        "gameSK": "20240923-d351b9b0-7d57-11ef-bf3b-11c09764b1b0"
+    },
+    "playerID": "oasis"
 }
 ###
 
@@ -169,11 +209,11 @@ Authorization: Bearer token
 //-------------------------------------------
 //----------------- g a m e s ---------------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games/f47391d0-79de-11ef-a422-2b5f7ec9aadf?gamePK=80304-game&gameSK=20241103-f47391d0-79de-11ef-a422-2b5f7ec9aadf
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/games/20240923-d351b9b0-7d57-11ef-bf3b-11c09764b1b0?gamePK=80304-game&gameSK=20240923-d351b9b0-7d57-11ef-bf3b-11c09764b1b0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 ###
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/games
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 
 {
     "activity": "basketball",
@@ -191,8 +231,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlc
     "location": 80304
 }
 ###
-PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/games/gameID
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
+PUT https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/games/gameID
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzQwNDIwMCwiZXhwIjoxNzI3NTc3MDAwfQ.RR4ypU42NI0w4ExAWQmv8x7CmS86NVlmKJkVZ0Mgzk0
 
 {
     "activity": "basketball",
@@ -217,41 +257,41 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlc
 //-------------------------------------------
 //---------- g a m e S t a t u s ------------
 //-------------------------------------------
-PUT https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/gameStatus
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+PUT https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/gameStatus
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzM3NTU4NiwiZXhwIjoxNzI3NTQ4Mzg2fQ.5M6dWFiqgbEZikAupxwuAY7ezGO6hEJNR4Maw0t-LJM
 
 {
-    "playerID": "player2",
-    "status": "leave",
+    "playerID": "player1",
+    "status": "join",
     "startTime": "8:00",
     "endTime": "11:30",
     "coordinates": "123,12314",
     "gamePK": "80304-game",
-    "gameSK": "20241103-f47391d0-79de-11ef-a422-2b5f7ec9aadf"
+    "gameSK": "20240923-d351b9b0-7d57-11ef-bf3b-11c09764b1b0"
 }
 ###
 
 //-------------------------------------------
 //----- r e g i s t e r e d G a m e s -------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/registeredGames
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/registeredGames
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzM3NTU4NiwiZXhwIjoxNzI3NTQ4Mzg2fQ.5M6dWFiqgbEZikAupxwuAY7ezGO6hEJNR4Maw0t-LJM
 ###
 
 //-------------------------------------------
 //------ s u g g e s t e d G a m e s --------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/suggestedGames?dateStamp=20240923
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/suggestedGames?dateStamp=20240923
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExNDcyOCwiZXhwIjoxNzI3Mjg3NTI4fQ.whkSJwYRQsvsuWp03DG4bEKNpcsfPdR1--DHt1IIgmQ
 ###
 
 //-------------------------------------------
 //- p l a y e r A v a i l a b i l i t i e s -
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
 ###
-POST https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+POST https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
 
 {
@@ -263,20 +303,20 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlc
     "skill": 3
 }
 ###
-DELETE https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
+DELETE https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/playerAvailabilities
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
 ###
 
 //-------------------------------------------
 //----- a v a i l a b l e P l a y e r s -----
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/availablePlayers?activity=basketball&location=80304&proximity=10&dateStamp=20241124&time=1700
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/availablePlayers?activity=basketball&location=80304&proximity=10&dateStamp=20241124&time=1700
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
 ###
 
 //-------------------------------------------
 //------- a v a i l a b l e G a m e s -------
 //-------------------------------------------
-GET https://k0x328qw44.execute-api.us-east-1.amazonaws.com/dev/v1/availableGames?activity=basketball&location=80304&proximity=10&dateStamp=20241103&time=1700
+GET https://zy33ts7f57.execute-api.us-east-1.amazonaws.com/dev/v1/availableGames?activity=basketball&location=80304&proximity=10&dateStamp=20241103&time=1700
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImhvZGdlcnRhQGdtYWlsLmNvbSIsInBsYXllcklEIjoicGxheWVyMSIsImlhdCI6MTcyNzExMDU0MCwiZXhwIjoxNzI3MjgzMzQwfQ.8w5iBzgWGqsVl_e3zgntcOj_AO9BaxNwsSC3HvcsyWk
 ###

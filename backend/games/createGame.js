@@ -59,7 +59,7 @@ class CreateGame {
     };
     const playerGame = {
       PK: `${playerID}-game`,
-      SK: `${game.dateStamp}-${playerID}`,
+      SK: `${game.dateStamp}-${gameID}`,
       gamePK: `${game.activity}-${game.location}`,
       gameSK: `${game.dateStamp}-${gameID}`,
     };

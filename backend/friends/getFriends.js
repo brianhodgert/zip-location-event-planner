@@ -1,14 +1,14 @@
-class GetProfile {
+class GetFriends {
   constructor(db) {
     this.DB = db;
   }
 
-  async getProfile(email) {
+  async getFriends(email) {
     try {
-      const profileInfo = await this.getItem(email);
+      const friends = await this.getItems(email);
       return {
         statusCode: 200,
-        body: JSON.stringify(profileInfo),
+        body: JSON.stringify(friends),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -27,12 +27,12 @@ class GetProfile {
     }
   }
 
-  async getItem(email) {
+  async getItems(email) {
     const response = await this.DB.getItem({
       PK: `${email}-profile`,
       SK: `${email}`,
     });
-    return response;
+    return response?.friends;
   }
 }
-module.exports = GetProfile;
+module.exports = GetFriends;

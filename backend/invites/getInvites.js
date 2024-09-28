@@ -1,14 +1,14 @@
-class GetProfile {
+class GetRegisteredGames {
   constructor(db) {
     this.DB = db;
   }
 
-  async getProfile(email) {
+  async getInvites(playerID) {
     try {
-      const profileInfo = await this.getItem(email);
+      const registeredGames = await this.getItems(playerID);
       return {
         statusCode: 200,
-        body: JSON.stringify(profileInfo),
+        body: JSON.stringify(registeredGames),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -27,12 +27,16 @@ class GetProfile {
     }
   }
 
-  async getItem(email) {
-    const response = await this.DB.getItem({
-      PK: `${email}-profile`,
-      SK: `${email}`,
-    });
+  async getItems(playerID) {
+    const expression = "#pk = :pk";
+    const names = {
+      "#pk": "PK",
+    };
+    const values = {
+      ":pk": `${playerID}-invite`,
+    };
+    const response = await this.DB.queryItem(expression, names, values);
     return response;
   }
 }
-module.exports = GetProfile;
+module.exports = GetRegisteredGames;

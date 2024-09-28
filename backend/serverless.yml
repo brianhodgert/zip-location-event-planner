@@ -163,6 +163,48 @@ functions:
           method: post
           cors: true
 
+##Friends#
+  friends:
+    handler: friends/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/friends
+          method: get
+          cors: true
+      - http:
+          path: v1/friends/{friendID}
+          method: delete
+          cors: true
+
+##Squads##
+  squads:
+    handler: squads/index.handler
+    role: 
+      Fn::GetAtt:
+        - LambdaExecutionRole
+        - Arn
+    events:
+      - http:
+          path: v1/squads
+          method: get
+          cors: true
+      - http:
+          path: v1/squads/{squadID}
+          method: get
+          cors: true
+      - http:
+          path: v1/squads/{squadID}
+          method: delete
+          cors: true
+      - http:
+          path: v1/squads
+          method: post
+          cors: true         
+
 ##Registered games##
   registeredGames:
     handler: registeredGames/index.handler
@@ -208,10 +250,6 @@ functions:
         - LambdaExecutionRole
         - Arn
     events:
-      - http:
-          path: v1/games
-          method: get
-          cors: true
       - http:
           path: v1/games/{gameID}
           method: get

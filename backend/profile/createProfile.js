@@ -45,19 +45,24 @@ class CreateProfile {
 
     const key = { PK: `${email}-profile`, SK: `${email}` };
     const expression =
-      "SET #location = :location, #activities = :activities, #availabilities = :availabilities, #playerID = :playerID";
+      "SET #location = :location, #activities = :activities, #availabilities = :availabilities, #playerID = :playerID, #friends = :friends, #squads = :squads";
     const names = {
       "#location": "location",
       "#activities": "activities",
       "#availabilities": "availabilities",
       "#playerID": "playerID",
+      "#friends": "friends",
+      "#squads": "squads",
     };
     const values = {
       ":location": profileInfo.location,
       ":activities": profileInfo.activities,
       ":availabilities": profileInfo.availabilities,
       ":playerID": profileInfo.playerID,
+      ":friends": [],
+      ":squads": [],
     };
+    playerIDKey[email] = email;
     await Promise.all([
       this.DB.updateItem(expression, key, names, values),
       this.DB.putItem(playerIDKey),

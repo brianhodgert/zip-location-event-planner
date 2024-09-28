@@ -1,14 +1,15 @@
-class GetProfile {
+class CreateGame {
   constructor(db) {
     this.DB = db;
   }
 
-  async getProfile(email) {
+  async createInvite(body) {
     try {
-      const profileInfo = await this.getItem(email);
+      await this.create(body);
+
       return {
         statusCode: 200,
-        body: JSON.stringify(profileInfo),
+        body: JSON.stringify("Invite sent"),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": true,
@@ -27,12 +28,18 @@ class GetProfile {
     }
   }
 
-  async getItem(email) {
-    const response = await this.DB.getItem({
-      PK: `${email}-profile`,
-      SK: `${email}`,
-    });
-    return response;
+  async create(invite) {
+    var inviteSK = invite.inviteID;
+    if (invite.inviteType == "game") {
+      inviteSK = invite.inviteID.gameSK;
+    }
+    const squadData = {
+      PK: `${invite.playerID}-invite`,
+      SK: inviteSK,
+      inviteType: invite.inviteType,
+      inviteID: invite.inviteID,
+    };
+    await this.DB.putItem(squadData);
   }
 }
-module.exports = GetProfile;
+module.exports = CreateGame;

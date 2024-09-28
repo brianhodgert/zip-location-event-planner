@@ -39,8 +39,11 @@ class GetGame {
       ":pk": gameKey.gameSK,
     };
     const playerResponse = await this.DB.queryItem(expression, names, values);
-
-    return [gameResponse, playerResponse];
+    if (gameResponse) {
+      return [gameResponse, playerResponse];
+    } else {
+      return [];
+    }
   }
 }
 module.exports = GetGame;

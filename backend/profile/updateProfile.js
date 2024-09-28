@@ -34,18 +34,16 @@ class UpdateProfile {
     const profileKey = { PK: `${email}-profile`, SK: `${email}` };
 
     const expression =
-      "SET #location = :location, #activities = :activities, #availabilities = :availabilities, #friends = :friends";
+      "SET #location = :location, #activities = :activities, #availabilities = :availabilities";
     const names = {
       "#location": "location",
       "#activities": "activities",
       "#availabilities": "availabilities",
-      "#friends": "friends",
     };
     const values = {
       ":location": profileInfo.location,
       ":activities": profileInfo.activities,
       ":availabilities": profileInfo.availabilities,
-      ":friends": profileInfo.friends,
     };
 
     const profile = await this.DB.getItem(profileKey);

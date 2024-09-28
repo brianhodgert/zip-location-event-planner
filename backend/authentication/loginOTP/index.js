@@ -57,7 +57,9 @@ module.exports.handler = async (event, context, callback) => {
             await bcrypt.compare(userCredentials.otp, hashedPassword)
           ) {
             token = { email: email };
-            if (existingUser.playerID) {
+            const profileKey = { PK: `${email}-profile`, SK: email };
+            const existingProfile = await dbService.getItem(profileKey);
+            if (existingProfile?.playerID) {
               token[playerID] = existingUser.playerID;
             }
             const accessToken = jwt.sign(token, ACCESS_TOKEN_SECRET, {

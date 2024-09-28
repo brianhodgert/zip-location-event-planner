@@ -57,7 +57,6 @@ class GetAvailablePlayers {
         ":pk": `${gameQuery.activity}-${zipCode}-player`,
         ":sk": `${gameQuery.dateStamp}`,
       };
-      console.log(values);
       var response = await this.DB.queryItem(expression, names, values);
       for (var item of response) {
         availablePlayers.push(item.playerID);
@@ -67,7 +66,6 @@ class GetAvailablePlayers {
         ":pk": `${gameQuery.activity}-${zipCode}-player`,
         ":sk": `${dayOfWeek}`,
       };
-      console.log(values);
       response = await this.DB.queryItem(expression, names, values);
       for (var item of response) {
         availablePlayers.push(item.playerID);

@@ -31,7 +31,6 @@ class UpdateGameStatus {
   async updateStatus(playerID, statusChange) {
     const gameKey = { PK: statusChange.gamePK, SK: statusChange.gameSK };
     const game = await this.DB.getItem(gameKey);
-    console.log(game);
 
     if (game == null) {
       return "Game not found.";
@@ -47,7 +46,7 @@ class UpdateGameStatus {
       if (game.playerCount <= 1) {
         await this.DB.deleteItem(gameKey);
       } else {
-        await this.incrementPlayerCount(gameKey, game.playerCount);
+        await this.changePlayerCount(gameKey, game.playerCount - 1);
       }
     } else if (statusChange.status == "join") {
       if (game.playerCount < game.maxPlayers) {
@@ -67,7 +66,7 @@ class UpdateGameStatus {
           gameSK: game.SK,
         };
         await this.DB.putItem(playerGame);
-        await this.incrementPlayerCount(gameKey, game.playerCount);
+        await this.changePlayerCount(gameKey, game.playerCount + 1);
       }
     } else {
       const gamePlayer = {
@@ -81,14 +80,14 @@ class UpdateGameStatus {
     }
   }
 
-  async incrementPlayerCount(gameKey, playerCount) {
+  async changePlayerCount(gameKey, playerCount) {
     const key = gameKey;
     const expression = "SET #playerCount = :playerCount";
     const names = {
       "#playerCount": "playerCount",
     };
     const values = {
-      ":playerCount": playerCount + 1,
+      ":playerCount": playerCount,
     };
     await this.DB.updateItem(expression, key, names, values);
   }

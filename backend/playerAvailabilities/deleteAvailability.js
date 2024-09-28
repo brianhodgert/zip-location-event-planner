@@ -36,7 +36,6 @@ class DeleteAvailability {
         PK: `${profileInfo.draftCard.activity}-${profileInfo.draftCard.location}-player`,
         SK: `${profileInfo.draftCard.dateStamp}-${profileInfo.playerID}`,
       };
-      console.log(availabilityKey);
       const expression = "SET #draftCard = :draftCard";
       const names = {
         "#draftCard": "draftCard",

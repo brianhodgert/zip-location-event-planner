@@ -21,7 +21,6 @@ class EmailService {
     params.TemplateData = JSON.stringify(templateData);
     params.ConfigurationSetName = this.configurationSetName;
 
-    console.log(params);
     try {
       await this.SES.sendTemplatedEmail(params);
     } catch (e) {
