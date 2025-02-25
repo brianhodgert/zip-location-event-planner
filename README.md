@@ -1,4 +1,3 @@
-# zip location event planner
 Location-Based Event Networking and Management System
 =====================================================
 
